@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panorama Lab</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main>
+    <section class="hero"><p class="eyebrow">COMPUTER VISION MINI PROJECT</p><h1>Panorama Lab</h1><p>Upload ordered, overlapping photos and build a panorama using your notebook’s feature matching and custom RANSAC pipeline.</p></section>
+    <section class="panel">
+      <label class="drop-zone" id="drop-zone"><input id="images" type="file" accept="image/*" multiple><span>Drop photos here or <strong>browse</strong></span><small>Choose 2–6 images in left-to-right order</small></label>
+      <div id="file-list" class="file-list" aria-live="polite"></div>
+      <div class="settings">
+        <label>Feature detector<select id="method"><option value="sift">SIFT — precise</option><option value="orb">ORB — faster</option></select></label>
+        <label>Blend<select id="blend"><option value="feather">Feathered</option><option value="hard">Hard composite</option></select></label>
+        <label>Match ratio <output id="ratio-value">0.75</output><input id="ratio" type="range" min="0.55" max="0.9" step="0.05" value="0.75"></label>
+        <label>RANSAC threshold <output id="threshold-value">5 px</output><input id="threshold" type="range" min="2" max="10" step="1" value="5"></label>
+      </div>
+      <button id="stitch">Create panorama</button><p id="status" role="status"></p>
+    </section>
+    <section id="result" class="panel hidden"><div class="result-head"><div><p class="eyebrow">RESULT</p><h2>Your panorama</h2></div><a id="download" download="panorama.jpg">Download JPEG</a></div><img id="panorama" alt="Generated panorama"><div id="diagnostics" class="diagnostics"></div></section>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
